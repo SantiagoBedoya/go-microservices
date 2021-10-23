@@ -1,7 +1,10 @@
 package controllers
 
 import (
+	"time"
+
 	"github.com/SantiagoBedoya/go-microservices/users/src/database"
+	"github.com/SantiagoBedoya/go-microservices/users/src/helpers"
 	"github.com/SantiagoBedoya/go-microservices/users/src/models"
 	"github.com/gofiber/fiber/v2"
 )
@@ -50,5 +53,35 @@ func Login(c *fiber.Ctx) error {
 			"message": "invalid credentials",
 		})
 	}
-	return c.Status(fiber.StatusOK).JSON(user)
+	token, err := helpers.GenerateJWT(user.Id)
+
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "invalid credentials",
+		})
+	}
+
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    token,
+		Expires:  time.Now().Add(time.Hour * 24),
+		HTTPOnly: true,
+	}
+	c.Cookie(&cookie)
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "success",
+	})
+}
+
+func Logout(c *fiber.Ctx) error {
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HTTPOnly: true,
+	}
+	c.Cookie(&cookie)
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "success",
+	})
 }
