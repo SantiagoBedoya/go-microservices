@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	fmt.Println("running emails microservice -- listen emails queque")
+	fmt.Println("running emails microservice -- listen emails queue")
 	rabbitmq := os.Getenv("AMQP_URL")
 
 	connection, err := amqp.Dial(rabbitmq)

@@ -20,7 +20,7 @@ func SetupAMQP() {
 	}
 
 	durable, autoDelete := true, false
-	internal, noWait := true, false
+	internal, noWait := false, false
 	err = channel.ExchangeDeclare("events", "topic", durable, autoDelete, internal, noWait, nil)
 
 	if err != nil {
@@ -28,7 +28,7 @@ func SetupAMQP() {
 	}
 
 	durable, exclusive := false, false
-	autoDelete, noWait = false, true
+	autoDelete, noWait = false, false
 	q, err := channel.QueueDeclare("emails", durable, autoDelete, exclusive, noWait, nil)
 	if err != nil {
 		panic("error declaring the queue: " + err.Error())
