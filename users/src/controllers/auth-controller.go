@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/SantiagoBedoya/go-microservices/users/src/database"
@@ -29,6 +30,13 @@ func Register(c *fiber.Ctx) error {
 
 	user.SetPassword(data["password"])
 	database.DB.Create(&user)
+
+	helpers.PublishToEmailQueque(helpers.Data{
+		Email:   user.Email,
+		Subject: "Welcome to go-microservices",
+		Message: fmt.Sprintf("Hi %s, we are so happy, welcome to the team", user.FullName()),
+	})
+
 	return c.Status(fiber.StatusCreated).JSON(user)
 }
 

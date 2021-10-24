@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  email_backend:
+    build: .
+    container_name: email-ms
+    environment:
+      EMAIL_HOST: smtp.ethereal.email
+      EMAIL_PORT: 587
+      EMAIL_USER: meggie.greenholt39@ethereal.email
+      EMAIL_PASSWORD: 6DudQyFJDFwA18GCZj
+      AMQP_URL: amqps://nqizuvws:Qvlmcfm46yNNWsUVjTWPbbAixvg4Dxo7@fish.rmq.cloudamqp.com/nqizuvws
+    ports:
+      - 8002:8000
+    volumes:
+      - .:/app

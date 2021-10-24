@@ -9,6 +9,7 @@ services:
       DB_DATABASE: users
       DB_USERNAME: root
       DB_PASSWORD: root
+      AMQP_URL: amqps://nqizuvws:Qvlmcfm46yNNWsUVjTWPbbAixvg4Dxo7@fish.rmq.cloudamqp.com/nqizuvws
     ports:
       - 8001:8000
     volumes:
