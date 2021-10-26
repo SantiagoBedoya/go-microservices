@@ -1,7 +1,9 @@
 version: '3.9'
 services:
   users_backend:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     container_name: users-ms
     environment:
       DB_HOST: users_db
