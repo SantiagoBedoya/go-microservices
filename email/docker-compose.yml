@@ -6,10 +6,10 @@ services:
       dockerfile: Dockerfile.dev
     container_name: email-ms
     environment:
-      EMAIL_HOST: smtp.gmail.com
+      EMAIL_HOST: smtp.ethereal.email
       EMAIL_PORT: 587
-      EMAIL_USER: pecesilloconaji@gmail.com
-      EMAIL_PASSWORD: 1002656487
+      EMAIL_USER: meggie.greenholt39@ethereal.email
+      EMAIL_PASSWORD: 6DudQyFJDFwA18GCZj
       AMQP_URL: amqps://nqizuvws:Qvlmcfm46yNNWsUVjTWPbbAixvg4Dxo7@fish.rmq.cloudamqp.com/nqizuvws
     ports:
       - 8002:8000
